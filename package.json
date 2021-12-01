@@ -1,0 +1,10 @@
+{
+  "name": "adventofcode2021",
+  "version": "1.0.0",
+  "author": "Przemysław Tyczyński <przemyslaw@tyczynski.pl>",
+  "license": "UNLICENSED",
+  "type": "module",
+  "devDependencies": {
+    "prettier": "^2.5.0"
+  }
+}
