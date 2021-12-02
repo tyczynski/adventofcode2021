@@ -1,9 +1,10 @@
-import fs from 'fs';
+const fs = require('fs');
+const path = require('path');
 
 // First part
 
 function getMeasurments() {
-  const buffer = fs.readFileSync('./day1data.txt');
+  const buffer = fs.readFileSync(path.resolve(__dirname, 'input.txt'));
   const data = buffer.toString();
   const dataArray = data.split('\n').map(Number);
 
