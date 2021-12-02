@@ -2,9 +2,12 @@
   "name": "adventofcode2021",
   "version": "1.0.0",
   "author": "Przemysław Tyczyński <przemyslaw@tyczynski.pl>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^27.4.3",
     "prettier": "^2.5.0"
+  },
+  "scripts": {
+    "test:watch": "jest --watch"
   }
 }
