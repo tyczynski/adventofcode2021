@@ -2,8 +2,12 @@ function getBits(record) {
   return record.split('').map(Number);
 }
 
-function binaryToDecimal(bitsArray) {
-  return Number(`0b${bitsArray.join('')}`);
+function binaryToDecimal(bitsArrayOrValue) {
+  const bits = Array.isArray(bitsArrayOrValue)
+    ? bitsArrayOrValue.join('')
+    : bitsArrayOrValue;
+
+  return Number(`0b${bits}`);
 }
 
 function getPowerConsumption(data) {
@@ -25,7 +29,42 @@ function getPowerConsumption(data) {
 }
 
 function getLifeSupportRating(data) {
-  return 0; // TODO:
+  function getRating(records, firstBit, secondBit) {
+    let clonedRecords = records.slice();
+    const recordLength = clonedRecords[0].length;
+
+    while (clonedRecords.length > 1) {
+      for (let i = 0; i < recordLength; i++) {
+        const counter = clonedRecords.reduce(
+          (acc, record) => {
+            acc[record[i]]++;
+            return acc;
+          },
+          [0, 0],
+        );
+
+        const winner =
+          counter[1] > counter[0] || counter[1] === counter[0]
+            ? firstBit
+            : secondBit;
+
+        clonedRecords = clonedRecords.filter((record) => record[i] == winner);
+
+        if (clonedRecords.length === 1) {
+          return clonedRecords[0];
+        }
+      }
+    }
+
+    return clonedRecords;
+  }
+
+  const oxygenGeneratorRating = getRating(data, 1, 0);
+  const co2ScrubberRating = getRating(data, 0, 1);
+
+  return (
+    binaryToDecimal(co2ScrubberRating) * binaryToDecimal(oxygenGeneratorRating)
+  );
 }
 
 module.exports = { getPowerConsumption, getLifeSupportRating };
