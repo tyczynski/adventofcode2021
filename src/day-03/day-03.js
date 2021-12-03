@@ -6,7 +6,7 @@ function binaryToDecimal(bitsArray) {
   return Number(`0b${bitsArray.join('')}`);
 }
 
-function getPowerConsumptionPart1(data) {
+function getPowerConsumption(data) {
   const gammaRateBits = data
     .reduce((acc, record) => {
       const bits = getBits(record);
@@ -24,8 +24,8 @@ function getPowerConsumptionPart1(data) {
   return binaryToDecimal(gammaRateBits) * binaryToDecimal(epsilonRateBits);
 }
 
-function getPowerConsumptionPart2(data) {
+function getLifeSupportRating(data) {
   return 0; // TODO:
 }
 
-module.exports = { getPowerConsumptionPart1, getPowerConsumptionPart2 };
+module.exports = { getPowerConsumption, getLifeSupportRating };

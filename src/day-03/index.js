@@ -1,12 +1,9 @@
 const { getData } = require('../utils');
-const {
-  getPowerConsumptionPart1,
-  getPowerConsumptionPart2,
-} = require('./powerConsumptionCalculator');
+const { getPowerConsumption, getLifeSupportRating } = require('./day-03');
 
 const data = getData('day-03');
 
 console.table({
-  'Part 1': getPowerConsumptionPart1(data),
-  'Part 2': getPowerConsumptionPart2(data),
+  'Power Consumption': getPowerConsumption(data),
+  'Life Support Rating': getLifeSupportRating(data),
 });
