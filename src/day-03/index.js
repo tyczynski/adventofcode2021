@@ -1,7 +1,7 @@
-const { getData } = require('../utils');
+const { getDataInRecords } = require('../utils');
 const { getPowerConsumption, getLifeSupportRating } = require('./day-03');
 
-const data = getData('day-03');
+const data = getDataInRecords('day-03');
 
 console.table({
   'Power Consumption': getPowerConsumption(data),

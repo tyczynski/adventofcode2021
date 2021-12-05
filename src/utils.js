@@ -11,9 +11,15 @@ function getData(folder, isTest = false) {
   const data = fs
     .readFileSync(path.resolve(__dirname, folder, inputFileName))
     .toString();
+
+  return data;
+}
+
+function getDataInRecords(folder, isTest) {
+  const data = getData(folder, isTest);
   const dataArray = data.split('\n').filter((record) => Boolean(record.trim()));
 
   return dataArray;
 }
 
-module.exports = { getData };
+module.exports = { getData, getDataInRecords };
