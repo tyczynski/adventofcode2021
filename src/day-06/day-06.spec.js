@@ -6,7 +6,7 @@ describe('Day 6: Lanternfish', () => {
 
   it.each([
     [80, 5934],
-    // [256, 26984457539],
+    [256, 26984457539],
   ])(
     'should return correct amount of the Lanterfish after %i days',
     (days, total) => {

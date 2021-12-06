@@ -1,20 +1,15 @@
 /**
- * @param {boolean} newborn
- * @param {number|undefined} timer
- */
-function createFish(newborn, timer) {
-  return {
-    newborn,
-    timer: timer ? timer : newborn ? 8 : 6,
-  };
-}
-
-/**
  * @param {string} data
  * @returns
  */
 function formatData(data) {
-  return data.split(',').map((number) => createFish(false, number));
+  return data
+    .split(',')
+    .map(Number)
+    .map((number) => ({
+      times: number,
+      multiplier: 1,
+    }));
 }
 
 /**
@@ -23,27 +18,23 @@ function formatData(data) {
  */
 function getLanterfishAmount(data, until) {
   let fishSchool = formatData(data);
-  let newbornSchool = [];
-  let currentDay = 0;
-  const untilDay = until;
+  let newSchool = 0;
 
-  while (currentDay < untilDay) {
+  for (let i = 0; i < until; i++) {
     for (const fish of fishSchool) {
-      if (fish.timer === 0) {
-        newbornSchool.push(createFish(true));
+      if (fish.times === 0) {
+        newSchool += fish.multiplier;
       }
 
-      const newTimer = fish.timer - 1;
-      fish.timer = newTimer < 0 ? 6 : newTimer;
+      const newTimer = fish.times - 1;
+      fish.times = newTimer < 0 ? 6 : newTimer;
     }
 
-    fishSchool = fishSchool.concat(newbornSchool);
-    newbornSchool = [];
-
-    currentDay++;
+    fishSchool.push({ times: 8, multiplier: newSchool });
+    newSchool = 0;
   }
 
-  return fishSchool.length;
+  return fishSchool.reduce((acc, fish) => acc + fish.multiplier, 0);
 }
 
 module.exports = {
