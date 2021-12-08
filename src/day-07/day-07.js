@@ -17,6 +17,34 @@ function getFuelToAlignCrabs(data) {
   return fuel;
 }
 
+/**
+ * @param {string} data
+ */
+function getFuelToAlignCrabsNoEco(data) {
+  const numbers = formatData(data);
+  const min = Math.min(...numbers);
+  const max = Math.max(...numbers);
+  const values = [];
+
+  for (let val = min; val <= max; val++) {
+    let fuelIndex = 0;
+
+    for (let i = 0; i < numbers.length; i++) {
+      const number = numbers[i];
+      const diff = Math.abs(val - number);
+
+      for (let i = 0; i < diff; i++) {
+        fuelIndex += i + 1;
+      }
+    }
+
+    values.push(fuelIndex);
+  }
+
+  return Math.min(...values);
+}
+
 module.exports = {
   getFuelToAlignCrabs,
+  getFuelToAlignCrabsNoEco,
 };
